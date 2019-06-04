@@ -8,8 +8,9 @@ module.exports = {
 
   // output config
   output: {
-    // output filename
-    filename: "bundle.js",
+    // output filename, use [contenthash] to take advantage of cache
+    // so only change made to js files would generate a new bundle
+    filename: "bundle.[contenthash].js",
     // output path, which needs to be an absolute path
     // the 'path' Node.js module is used to generate absolute path
     path: path.resolve(__dirname, './dist'),
@@ -82,8 +83,10 @@ module.exports = {
     new TerserPlugin(),
     // extract CSS into a separate file to reduce the bundle size
     // so user can download JS and CSS files in parallel
+    // use [contenthash] to take advantage of cache
+    // so only changes made to css files would generate a new CSS bundle
     new MiniCssExtractPlugin({
-      filename: 'styles.css'
+      filename: 'styles.[contenthash].css'
     })
   ]
 }
