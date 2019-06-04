@@ -1,6 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   // entry config
@@ -81,12 +82,16 @@ module.exports = {
   plugins: [
     // minimise the output JS bundle file
     new TerserPlugin(),
+
     // extract CSS into a separate file to reduce the bundle size
     // so user can download JS and CSS files in parallel
     // use [contenthash] to take advantage of cache
     // so only changes made to css files would generate a new CSS bundle
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash].css'
-    })
+    }),
+
+    // remove all the files in the output folder before generating new bundle files
+    new CleanWebpackPlugin()
   ]
 }
