@@ -1,4 +1,4 @@
-import Logo from './images/logo_black.png'
+import Logo from '../images/logo_black.png'
 
 function addImage () {
   const img = document.createElement('img')
