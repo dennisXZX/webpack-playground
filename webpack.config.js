@@ -96,6 +96,16 @@ module.exports = {
     new CleanWebpackPlugin(),
 
     // generate an index.html with all the bundles injected into it
-    new HtmlWebpackPlugin()
+    // also include some meta in the generated index.html
+    new HtmlWebpackPlugin({
+      title: 'Hello World',
+      meta: {
+        viewport: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
+        'X-UA-Compatible': {
+          'http-equiv': 'X-UA-Compatible',
+          'content': 'ie=edge'
+        }
+      }
+    })
   ]
 }
