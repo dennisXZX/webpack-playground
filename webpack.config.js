@@ -1,7 +1,8 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   // entry config
@@ -16,7 +17,7 @@ module.exports = {
     // the 'path' Node.js module is used to generate absolute path
     path: path.resolve(__dirname, './dist'),
     // specify path for all the assets within your application (like images)
-    publicPath: "dist/"
+    publicPath: ""
   },
 
   mode: "none",
@@ -92,6 +93,9 @@ module.exports = {
     }),
 
     // remove all the files in the output folder before generating new bundle files
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+
+    // generate an index.html with all the bundles injected into it
+    new HtmlWebpackPlugin()
   ]
 }
