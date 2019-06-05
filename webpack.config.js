@@ -34,25 +34,13 @@ module.exports = {
         ]
       },
 
-      // handle .css file, loader is executed from right to left
-      // css-loader converts CSS to Javascript representation
-      // MiniCssExtractPlugin.loader extracts CSS into a separate file
-      // LEGACY: style-loader creates style tags inside HTML page and place CSS into it
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      },
-
       // handle .scss files, loader is executed from right to left
       // sass-loader converts SASS to CSS
       // css-loader converts CSS to Javascript representation
       // MiniCssExtractPlugin.loader extracts CSS into a separate file
       // LEGACY: style-loader creates style tags inside HTML page and place CSS into it
       {
-        test: /\.scss$/,
+        test:/\.(s*)css$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -76,12 +64,12 @@ module.exports = {
           }
         }
       }
-    ]
+    ] // END OF rules
   },
 
   // plugin config
   plugins: [
-    // minimise the output JS bundle file
+    // minimise output JS bundle files
     new TerserPlugin(),
 
     // extract CSS into a separate file to reduce the bundle size
@@ -96,7 +84,7 @@ module.exports = {
     new CleanWebpackPlugin(),
 
     // generate an index.html with all the bundles injected into it
-    // also include some meta in the generated index.html
+    // also include some meta tags in the generated index.html
     new HtmlWebpackPlugin({
       title: 'Hello World',
       meta: {
@@ -107,5 +95,6 @@ module.exports = {
         }
       }
     })
-  ]
+
+  ] // END OF plugins
 }
