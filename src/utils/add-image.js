@@ -6,6 +6,7 @@ function addImage () {
   img.alt = 'Logo'
   img.width = 300
   img.src = Logo
+  img.setAttribute('style', 'position: absolute; right: 20px; bottom: 20px')
 
   const body = document.querySelector('body')
 

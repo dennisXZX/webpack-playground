@@ -1,16 +1,19 @@
 import HelloWorldButton from './components/hello-world-button/Hello-world-button'
 import Heading from './components/heading/Heading'
-
 import addImage from './utils/add-image'
 
+// call a utility function
 addImage()
 
-const helloWorldButton = new HelloWorldButton()
-helloWorldButton.render()
-
+// render a heading
 const heading = new Heading()
 heading.render()
 
+// render a button
+const helloWorldButton = new HelloWorldButton()
+helloWorldButton.render()
+
+// check which mode is in
 if (process.env.NODE_ENV === 'production') {
   console.log('production mode')
 } else {

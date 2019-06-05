@@ -36,7 +36,7 @@ module.exports = {
     // where to serve content from
     contentBase: path.resolve(__dirname, 'dist'),
     // the filename that is considered the index file
-    index: 'index.html',
+    index: 'hello-world.js.html',
     // specify a port number to listen for requests on
     port: 9000,
     // enable Hot Module Replacement feature
