@@ -63,7 +63,17 @@ module.exports = {
             plugins: [ 'transform-class-properties' ]
           }
         }
+      },
+
+      // handle .hbs files,
+      // handlebars template is used as a base to generate an index.html in the dist folder
+      {
+        test: /\.hbs$/,
+        use: [
+          'handlebars-loader'
+        ]
       }
+
     ] // END OF rules
   },
 
@@ -84,16 +94,11 @@ module.exports = {
     new CleanWebpackPlugin(),
 
     // generate an index.html with all the bundles injected into it
-    // also include some meta tags in the generated index.html
+    // here we use our own handlebars template as the base to generate an index.html in dist folder
     new HtmlWebpackPlugin({
-      title: 'Hello World',
-      meta: {
-        viewport: 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0',
-        'X-UA-Compatible': {
-          'http-equiv': 'X-UA-Compatible',
-          'content': 'ie=edge'
-        }
-      }
+      title: 'Hello Webpack',
+      description: 'Webpack playground',
+      template: "./index.hbs"
     })
 
   ] // END OF plugins
