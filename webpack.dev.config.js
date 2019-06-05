@@ -5,6 +5,7 @@ const path = require('path');
 
   - No need to minimise JS files
   - No need to extract CSS code from the JS bundle files
+  - No need to use [contenthash] in the file name as we don't consider caching in dev mode
   - Set up Webpack dev server
 */
 
@@ -12,14 +13,18 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  // entry config
-  entry: './src/index.js',
+  // entry config for multiple entry points
+  entry: {
+    'hello-world': './src/hello-world.js',
+    'kiwi': './src/kiwi.js'
+  },
 
   // output config
   output: {
     // output filename
+    // use [name] to retrieve the original name of the file before bundling
     // in development we don't need to consider browser cache, so no [contenthash] is needed in the file name
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     // output path, which needs to be an absolute path
     // the 'path' Node.js module is used to generate absolute path
     path: path.resolve(__dirname, './dist'),
@@ -51,7 +56,12 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]'
+            },
+          }
         ]
       },
 
@@ -103,12 +113,31 @@ module.exports = {
     // remove all the files in the output folder before generating new bundle files
     new CleanWebpackPlugin(),
 
-    // generate an index.html with all the bundles injected into it
-    // here we use our own handlebars template as the base to generate an index.html in dist folder
+    // generate an HTML file with all the bundles injected into it
+    // here we use our own handlebars template as a base to generate an HTML file in dist folder
+    // since we have multiple entry points, we need to generate an HTML for each entry point
     new HtmlWebpackPlugin({
+      // specify the output file name in dist folder
+      filename: "hello-world.html",
+
+      // specify which JS chuck should be injected into the generated HTML file
+      // each chuck name should be existed in the entry object
+      chunks: ['hello-world'],
+
+      // title & description are dynamic data used in the handlebars template engine
       title: 'Hello Webpack',
       description: 'Webpack playground',
-      template: "./index.hbs"
+
+      // the base template for generating HTML file
+      template: "./page-template.hbs"
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: "kiwi.html",
+      chunks: ['kiwi'],
+      title: 'Hello Kiwi',
+      description: 'Kiwi playground',
+      template: "./page-template.hbs"
     })
 
   ] // END OF plugins

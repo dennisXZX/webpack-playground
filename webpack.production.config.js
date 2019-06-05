@@ -45,7 +45,12 @@ module.exports = {
       {
         test: /\.(png|jpg)$/,
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]'
+            },
+          }
         ]
       },
 
@@ -101,7 +106,7 @@ module.exports = {
     // extract CSS into a separate file to reduce the bundle size
     // so user can download JS and CSS files in parallel
     // use [name] to retrieve the original name of the file before bundling
-    // use [contenthash] to take advantage of cache
+    // use [contenthash] to take advantage of file caching
     // so only changes made to css files would generate a new CSS bundle
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
@@ -111,7 +116,7 @@ module.exports = {
     new CleanWebpackPlugin(),
 
     // generate an HTML file with all the bundles injected into it
-    // here we use our own handlebars template as the base to generate an HTML file in dist folder
+    // here we use our own handlebars template as a base to generate an HTML file in dist folder
     // since we have multiple entry points, we need to generate an HTML for each entry point
     new HtmlWebpackPlugin({
       // specify the output file name in dist folder

@@ -21,4 +21,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // ON PURPOSE: for testing how error is handled in production and development modes respectively
-helloWorldButton.methodThatDoesNotExist()
+// helloWorldButton.methodThatDoesNotExist()
