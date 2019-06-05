@@ -5,6 +5,7 @@ const path = require('path');
 
   - No need to minimise JS files
   - No need to extract CSS code from the JS bundle files
+  - Set up Webpack dev server
 */
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -29,6 +30,18 @@ module.exports = {
   // set mode to production, this would automatically enable a list of plugins for assisting development
   // this also sets process.env.NODE_ENV on DefinePlugin to value development
   mode: "development",
+
+  // set up Webpack dev server
+  devServer: {
+    // where to serve content from
+    contentBase: path.resolve(__dirname, 'dist'),
+    // the filename that is considered the index file
+    index: 'index.html',
+    // specify a port number to listen for requests on
+    port: 9000,
+    // enable Hot Module Replacement feature
+    hot: true
+  },
 
   // loader config
   module: {
