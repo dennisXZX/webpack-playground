@@ -1,5 +1,11 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin')
+
+/*
+  Production Mode
+
+  - No need to set up Terser plugin for JS files minification as it is already included by default
+*/
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -20,7 +26,9 @@ module.exports = {
     publicPath: ""
   },
 
-  mode: "none",
+  // set mode to production, this would automatically enable a list of plugins for optimisation
+  // this also sets process.env.NODE_ENV on DefinePlugin to value production
+  mode: "production",
 
   // loader config
   module: {
@@ -80,7 +88,8 @@ module.exports = {
   // plugin config
   plugins: [
     // minimise output JS bundle files
-    new TerserPlugin(),
+    // we don't need Terser plugin in 'production' mode as it's already included by default
+    // new TerserPlugin(),
 
     // extract CSS into a separate file to reduce the bundle size
     // so user can download JS and CSS files in parallel
