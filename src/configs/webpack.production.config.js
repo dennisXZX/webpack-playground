@@ -45,7 +45,9 @@ module.exports = {
   optimization: {
     // use SplitChunksPlugin to extract common code into a separate chuck
     splitChunks: {
-      chunks: "all"
+      chunks: "all",
+      minSize: 10000,
+      automaticNameDelimiter: "_"
     }
   },
 
@@ -143,7 +145,7 @@ module.exports = {
 
       // specify which JS chuck should be injected into the generated HTML file
       // each chuck name should be existed in the entry object
-      chunks: ['hello-world', 'vendors~hello-world~kiwi'],
+      chunks: ['hello-world', 'vendors_hello-world_kiwi'],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello Webpack',
@@ -155,7 +157,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors~hello-world~kiwi'],
+      chunks: ['kiwi', 'vendors_hello-world_kiwi'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./page-template.hbs"
