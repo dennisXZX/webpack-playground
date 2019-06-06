@@ -14,7 +14,8 @@ module.exports = {
   // entry config for multiple entry points
   entry: {
     'hello-world': './src/pages/hello-world.ts',
-    'kiwi': './src/pages/kiwi.ts'
+    'kiwi': './src/pages/kiwi.ts',
+    'react': './src/pages/react.tsx'
   },
 
   // output config
@@ -39,7 +40,7 @@ module.exports = {
 
   // automatically resolve these file extensions
   resolve: {
-    extensions: ['.ts', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
 
   optimization: {
@@ -82,10 +83,10 @@ module.exports = {
         ]
       },
 
-      // handle `.ts` files
+      // handle .ts and .tsx files
       // need to create a typings.d.ts in the project root to handle image and JSON imports in TS file
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         loader: "ts-loader"
       },
 
@@ -145,22 +146,30 @@ module.exports = {
 
       // specify which JS chuck should be injected into the generated HTML file
       // each chuck name should be existed in the entry object
-      chunks: ['hello-world', 'vendors_hello-world_kiwi'],
+      chunks: ['hello-world', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello Webpack',
       description: 'Webpack playground',
 
       // the base template for generating HTML file
-      template: "./page-template.hbs"
+      template: "./page-template-static.hbs"
     }),
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors_hello-world_kiwi'],
+      chunks: ['kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
-      template: "./page-template.hbs"
+      template: "./page-template-static.hbs"
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: "react.html",
+      chunks: ['react', 'vendors_react', 'vendors_hello-world_kiwi_react'],
+      title: 'Hello React',
+      description: 'React playground',
+      template: "./page-template-SPA.hbs"
     })
 
   ] // END OF plugins

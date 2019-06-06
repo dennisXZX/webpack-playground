@@ -27,6 +27,14 @@ app.get('/kiwi', (req, res) => {
   res.send(contentFromHtmlFile)
 })
 
+app.get('/react', (req, res) => {
+  const pathToHtmlFile = path.resolve(__dirname, '../client/dist/react.html')
+
+  const contentFromHtmlFile = fs.readFileSync(pathToHtmlFile, 'utf-8')
+
+  res.send(contentFromHtmlFile)
+})
+
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}.`)
 })
