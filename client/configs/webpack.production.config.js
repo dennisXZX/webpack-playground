@@ -1,53 +1,42 @@
 const path = require('path');
 
 /*
-  Development Mode
+  Production Mode
 
-  - No need to minimise JS files
-  - No need to extract CSS code from the JS bundle files
-  - No need to use [contenthash] in the file name as we don't take into account caching in dev mode
-  - Set up Webpack dev server
+  - No need to set up Terser plugin for JS files minification as it is already included by default in Webpack 4
 */
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   // entry config for multiple entry points
   entry: {
-    'hello-world': './src/pages/hello-world.ts',
-    'kiwi': './src/pages/kiwi.ts',
-    'react': './src/pages/react.tsx'
+    'hello-world': path.resolve(__dirname, '../apps/hello-world/index.ts'),
+    'kiwi': path.resolve(__dirname, '../apps/kiwi/index.ts'),
+    'react': path.resolve(__dirname, '../apps/react/index.tsx')
   },
 
   // output config
   output: {
     // output filename
     // use [name] to retrieve the original name of the file before bundling
-    // in development we don't need to consider browser cache, so no [contenthash] is needed in the file name
-    filename: "[name].bundle.js",
+    // use [contenthash] to take advantage of cache
+    // so only change made to js files would generate a new bundle
+    filename: "[name].[contenthash].js",
+
     // output path, which needs to be an absolute path
     // the 'path' Node.js module is used to generate absolute path
-    path: path.resolve(__dirname, '../../dist'),
+    path: path.resolve(__dirname, '../dist'),
+
     // specify path for all the assets within your application (like images)
     publicPath: ""
   },
 
-  // set mode to production, this would automatically enable a list of plugins for assisting development
-  // this also sets process.env.NODE_ENV on DefinePlugin to value development
-  mode: "development",
-
-  // set up Webpack dev server
-  devServer: {
-    // where to serve content from
-    contentBase: path.resolve(__dirname, 'dist'),
-    // the filename that is considered the index file
-    index: 'hello-world.js.html',
-    // specify a port number to listen for requests on
-    port: 9000,
-    // enable Hot Module Replacement feature
-    hot: true
-  },
+  // set mode to production, this would automatically enable a list of plugins for optimisation
+  // this also sets process.env.NODE_ENV on DefinePlugin to value production
+  mode: "production",
 
   // automatically resolve these file extensions
   resolve: {
@@ -88,7 +77,7 @@ module.exports = {
       {
         test:/\.(s*)css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -132,6 +121,19 @@ module.exports = {
 
   // plugin config
   plugins: [
+    // minimise output JS bundle files
+    // we don't need Terser plugin in 'production' mode as it's already included by default
+    // new TerserPlugin(),
+
+    // extract CSS into a separate file to reduce the bundle size
+    // so user can download JS and CSS files in parallel
+    // use [name] to retrieve the original name of the file before bundling
+    // use [contenthash] to take advantage of file caching
+    // so only changes made to css files would generate a new CSS bundle
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
+
     // remove all the files in the output folder before generating new bundle files
     new CleanWebpackPlugin(),
 
@@ -144,7 +146,7 @@ module.exports = {
 
       // specify which JS chuck should be injected into the generated HTML file
       // each chuck name should be existed in the entry object
-      chunks: ['hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: ['hello-world', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello World',
@@ -156,7 +158,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: ['kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./page-template-static.hbs"

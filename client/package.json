@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config src/configs/webpack.production.config.js",
-    "dev": "webpack-dev-server --config src/configs/webpack.dev.config.js"
+    "build": "webpack --config configs/webpack.production.config.js",
+    "dev": "webpack-dev-server --config configs/webpack.dev.config.js"
   },
   "keywords": [],
   "author": "Dennis Xiao",

@@ -1,5 +1,5 @@
-import Heading from '../components/heading/Heading'
-import Kiwi from '../components/kiwi/Kiwi'
+import Heading from '../common/components/heading/Heading'
+import Kiwi from './components/kiwi/Kiwi'
 
 import { upperFirst } from 'lodash'
 
