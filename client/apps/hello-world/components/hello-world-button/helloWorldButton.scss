@@ -1,13 +1,21 @@
 $font-size: 20px;
-$button-background-color: red;
+$button-background-color: #ff6607;
 
 .hello-world-button {
   font-size: $font-size;
   padding: 7px 15px;
-  background: $button-background-color;
+  background-color: $button-background-color;
   color: white;
   outline: none;
   cursor: pointer;
+}
+
+.hello-world-button:hover {
+  background-color: palevioletred;
+}
+
+.hello-world-button:focus {
+  outline: none;
 }
 
 .hello-world-text {

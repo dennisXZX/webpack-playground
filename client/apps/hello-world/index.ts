@@ -2,9 +2,9 @@ import HelloWorldButton from './components/hello-world-button/HelloWorldButton'
 import Heading from '../common/components/heading/Heading'
 import addImage from './utils/add-image'
 
-// import bootstrap into project
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import Bootstrap 4
+import 'bootstrap' // Bootstrap JS file
+import './index.scss' // Bootstrap SCSS file
 
 import { upperFirst } from 'lodash'
 

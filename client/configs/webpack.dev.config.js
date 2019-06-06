@@ -5,6 +5,7 @@ const path = require('path');
 
   - No need to minimise JS files
   - No need to extract CSS code from the JS bundle files
+  - Use style-loader to inject style to the generated HTML page
   - No need to use [contenthash] in the file name as we don't take into account caching in dev mode
   - Set up Webpack dev server
 */
@@ -82,14 +83,25 @@ module.exports = {
 
       // handle .scss files, loader is executed from right to left
       // sass-loader converts SASS to CSS
-      // css-loader converts CSS to Javascript representation
-      // MiniCssExtractPlugin.loader extracts CSS into a separate file
-      // LEGACY: style-loader creates style tags inside HTML page and place CSS into it
+      // postcss-loader converts modern CSS into something that most browsers can understand
+      // css-loader translates CSS into CommonJS modules
+      // style-loader injects style tags to the generated HTML page
       {
         test:/\.(s*)css$/,
         use: [
           'style-loader',
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('precss'), // allow you to use the latest CSS features
+                  require('autoprefixer') // add vendor prefixes to CSS rules
+                ]
+              }
+            }
+          },
           'sass-loader'
         ]
       },
