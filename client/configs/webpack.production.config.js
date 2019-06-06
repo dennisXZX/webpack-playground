@@ -146,7 +146,7 @@ module.exports = {
 
       // specify which JS chuck should be injected into the generated HTML file
       // each chuck name should be existed in the entry object
-      chunks: ['hello-world', 'vendors_hello-world_kiwi_react'],
+      chunks: ['hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello World',
@@ -158,7 +158,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: ['kiwi', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./page-template-static.hbs"
