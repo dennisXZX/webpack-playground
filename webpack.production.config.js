@@ -37,8 +37,16 @@ module.exports = {
   // this also sets process.env.NODE_ENV on DefinePlugin to value production
   mode: "production",
 
+  // automatically resolve these file extensions
   resolve: {
     extensions: ['.ts', '.js', '.json']
+  },
+
+  optimization: {
+    // use SplitChunksPlugin to extract common code into a separate chuck
+    splitChunks: {
+      chunks: "all"
+    }
   },
 
   // loader config
@@ -135,7 +143,7 @@ module.exports = {
 
       // specify which JS chuck should be injected into the generated HTML file
       // each chuck name should be existed in the entry object
-      chunks: ['hello-world'],
+      chunks: ['hello-world', 'vendors~hello-world~kiwi'],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello Webpack',
@@ -147,7 +155,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi'],
+      chunks: ['kiwi', 'vendors~hello-world~kiwi'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./page-template.hbs"

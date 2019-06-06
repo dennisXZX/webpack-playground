@@ -2,12 +2,17 @@ import HelloWorldButton from './components/hello-world-button/Hello-world-button
 import Heading from './components/heading/Heading'
 import addImage from './utils/add-image'
 
+import { upperFirst } from 'lodash'
+
 // call a utility function
 addImage()
 
 // render a heading
 const heading = new Heading()
-heading.render()
+
+// over-engineer to use lodash for this
+// but this is used to demonstrate how to extract common code in Webpack
+heading.render(upperFirst('hello world'))
 
 // render a button
 const helloWorldButton = new HelloWorldButton()
