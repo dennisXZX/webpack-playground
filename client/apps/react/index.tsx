@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { upperFirst } from 'lodash'
+import HelloButton from './components/hello-button/HelloButton'
 
 ReactDOM.render(
-  <h1>{ upperFirst('hello, React!') }</h1>,
+  <HelloButton />,
   document.getElementById('app_root')
 );
