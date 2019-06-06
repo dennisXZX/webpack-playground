@@ -4,9 +4,9 @@ function addImage () {
   const img = document.createElement('img')
 
   img.alt = 'Logo'
-  img.width = 300
+  img.width = 160
   img.src = Logo
-  img.setAttribute('style', 'position: absolute; right: 20px; bottom: 20px')
+  img.setAttribute('style', 'position: absolute; right: 0; bottom: 10px')
 
   const body = document.querySelector('body')
 
