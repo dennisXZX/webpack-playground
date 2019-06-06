@@ -13,8 +13,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   // entry config for multiple entry points
   entry: {
-    'hello-world': './src/hello-world.ts',
-    'kiwi': './src/kiwi.ts'
+    'hello-world': './src/pages/hello-world.ts',
+    'kiwi': './src/pages/kiwi.ts'
   },
 
   // output config
