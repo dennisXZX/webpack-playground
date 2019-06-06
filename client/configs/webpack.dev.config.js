@@ -27,9 +27,11 @@ module.exports = {
     // use [name] to retrieve the original name of the file before bundling
     // in development we don't need to consider browser cache, so no [contenthash] is needed in the file name
     filename: "[name].bundle.js",
+
     // output path, which needs to be an absolute path
-    // the 'path' Node.js module is used to generate absolute path
-    path: path.resolve(__dirname, '../../dist'),
+    // the 'path' Node.js module is used to generate an absolute path
+    path: path.resolve(__dirname, '../dist'),
+
     // specify path for all the assets within your application (like images)
     publicPath: ""
   },

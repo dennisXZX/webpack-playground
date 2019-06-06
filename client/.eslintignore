@@ -1,3 +1,6 @@
+# Ignored Folders #
 /dist
 /configs
+
+# Ignored Files #
 typings.d.ts

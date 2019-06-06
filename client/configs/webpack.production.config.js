@@ -27,7 +27,7 @@ module.exports = {
     filename: "[name].[contenthash].js",
 
     // output path, which needs to be an absolute path
-    // the 'path' Node.js module is used to generate absolute path
+    // the 'path' Node.js module is used to generate an absolute path
     path: path.resolve(__dirname, '../dist'),
 
     // specify path for all the assets within your application (like images)
