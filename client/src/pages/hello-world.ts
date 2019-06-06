@@ -2,7 +2,6 @@ import HelloWorldButton from '../components/hello-world-button/HelloWorldButton'
 import Heading from '../components/heading/Heading'
 import addImage from '../utils/add-image'
 
-import React from 'react'
 import { upperFirst } from 'lodash'
 
 // call a utility function
