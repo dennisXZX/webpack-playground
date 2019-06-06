@@ -15,8 +15,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   // entry config for multiple entry points
   entry: {
-    'hello-world': './src/hello-world.js',
-    'kiwi': './src/kiwi.js'
+    'hello-world': './src/hello-world.ts',
+    'kiwi': './src/kiwi.ts'
   },
 
   // output config
@@ -48,6 +48,10 @@ module.exports = {
     hot: true
   },
 
+  resolve: {
+    extensions: ['.ts', '.js', '.json']
+  },
+
   // loader config
   module: {
     // specify loaders for Webpack, each loader is represented as an object
@@ -77,6 +81,13 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
+      },
+
+      // handle `.ts` files
+      // need to create a typings.d.ts in the project root to handle image and JSON imports in TS file
+      {
+        test: /\.ts$/,
+        loader: "ts-loader"
       },
 
       // handle .js files,
