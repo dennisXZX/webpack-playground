@@ -1,4 +1,4 @@
-import './hello-world-button.scss'
+import './helloWorldButton.scss'
 
 class helloWorldButton {
   // use class properties, try babel plugin 'transform-class-properties'

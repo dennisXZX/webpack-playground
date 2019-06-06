@@ -1,4 +1,4 @@
-import HelloWorldButton from '../components/hello-world-button/Hello-world-button'
+import HelloWorldButton from '../components/hello-world-button/HelloWorldButton'
 import Heading from '../components/heading/Heading'
 import addImage from '../utils/add-image'
 
