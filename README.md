@@ -1,8 +1,8 @@
 ## Webpack Playground
 
-This app is mainly a playground trying to configure Webpack from scratch to support multiple apps.
+This app is mainly a playground trying to configure Webpack from scratch to support a mono repo with multiple apps.
 
-How to run client app:
+How to run client apps:
 
 - cd into client and `npm i` to install dependencies
 - `npm run build` to build all apps
@@ -15,7 +15,7 @@ How to run server app:
 
 Routes:
 
-/hello-world - a static website
-/kiwi - a static website
-/react - a React app
-/vue - a Vue app 
+- /hello-world - a static website
+- /kiwi - a static website
+- /react - a React app
+- /vue - a Vue app 
