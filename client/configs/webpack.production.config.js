@@ -153,7 +153,7 @@ module.exports = {
       description: 'Hello playground',
 
       // the base template for generating HTML file
-      template: "./page-template-static.hbs"
+      template: "./templates/page-template-static.hbs"
     }),
 
     new HtmlWebpackPlugin({
@@ -161,7 +161,7 @@ module.exports = {
       chunks: ['kiwi', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
-      template: "./page-template-static.hbs"
+      template: "./templates/page-template-static.hbs"
     }),
 
     new HtmlWebpackPlugin({
@@ -169,7 +169,7 @@ module.exports = {
       chunks: ['react', 'vendors_react', 'vendors_hello-world_kiwi_react'],
       title: 'Hello React',
       description: 'React playground',
-      template: "./page-template-SPA.hbs"
+      template: "./templates/page-template-SPA.hbs"
     })
 
   ] // END OF plugins
