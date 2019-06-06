@@ -84,6 +84,9 @@ module.exports = {
       // handle .scss files, loader is executed from right to left
       // sass-loader converts SASS to CSS
       // postcss-loader converts modern CSS into something that most browsers can understand
+      // use .postcssrc.json to config postcss-loader
+      // "precss" plugin allows you to use the latest CSS features
+      // "autoprefixer" plugin adds vendor prefixes to CSS rules
       // css-loader translates CSS into CommonJS modules
       // style-loader injects style tags to the generated HTML page
       {
@@ -91,17 +94,7 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function () {
-                return [
-                  require('precss'), // allow you to use the latest CSS features
-                  require('autoprefixer') // add vendor prefixes to CSS rules
-                ]
-              }
-            }
-          },
+          'postcss-loader',
           'sass-loader'
         ]
       },
