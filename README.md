@@ -1,4 +1,4 @@
-## Webpack Playground
+## Webpack for Mono repo
 
 This app is mainly a playground trying to configure Webpack from scratch to support a mono repo with multiple apps.
 

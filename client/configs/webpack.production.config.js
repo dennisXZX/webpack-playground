@@ -153,12 +153,12 @@ module.exports = {
       description: 'Hello playground',
 
       // the base template for generating HTML file
-      template: "./templates/page-template-static.hbs"
+      template: "./templates/page-template-bootstrap.hbs"
     }),
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: ['kiwi', 'vendors_hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./templates/page-template-static.hbs"

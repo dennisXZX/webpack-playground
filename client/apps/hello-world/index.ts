@@ -2,6 +2,10 @@ import HelloWorldButton from './components/hello-world-button/HelloWorldButton'
 import Heading from '../common/components/heading/Heading'
 import addImage from './utils/add-image'
 
+// import bootstrap into project
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import { upperFirst } from 'lodash'
 
 // call a utility function
