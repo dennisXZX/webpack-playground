@@ -147,8 +147,8 @@ module.exports = {
       chunks: ['hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine
-      title: 'Hello Webpack',
-      description: 'Webpack playground',
+      title: 'Hello World',
+      description: 'Hello playground',
 
       // the base template for generating HTML file
       template: "./page-template-static.hbs"
