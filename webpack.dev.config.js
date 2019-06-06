@@ -5,7 +5,7 @@ const path = require('path');
 
   - No need to minimise JS files
   - No need to extract CSS code from the JS bundle files
-  - No need to use [contenthash] in the file name as we don't consider caching in dev mode
+  - No need to use [contenthash] in the file name as we don't take into account caching in dev mode
   - Set up Webpack dev server
 */
 

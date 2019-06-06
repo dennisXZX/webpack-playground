@@ -3,7 +3,7 @@ const path = require('path');
 /*
   Production Mode
 
-  - No need to set up Terser plugin for JS files minification as it is already included by default
+  - No need to set up Terser plugin for JS files minification as it is already included by default in Webpack 4
 */
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
