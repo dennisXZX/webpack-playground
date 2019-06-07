@@ -19,6 +19,10 @@ module.exports = {
     'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index.tsx')
   },
 
+  // set mode to production, this would automatically enable a list of plugins for production optimisation
+  // this also sets process.env.NODE_ENV on DefinePlugin to value 'production'
+  mode: "production",
+
   // output config
   output: {
     // output filename
@@ -33,10 +37,6 @@ module.exports = {
     // specify path for all the assets within your application (like images and fonts)
     publicPath: ""
   },
-
-  // set mode to production, this would automatically enable a list of plugins for production optimisation
-  // this also sets process.env.NODE_ENV on DefinePlugin to value 'production'
-  mode: "production",
 
   // automatically resolve these file extensions
   resolve: {

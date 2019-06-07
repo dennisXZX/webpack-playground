@@ -22,6 +22,10 @@ module.exports = {
     'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index.tsx')
   },
 
+  // set mode to development, this would automatically enable a list of plugins for assisting development
+  // this also sets process.env.NODE_ENV on DefinePlugin to value 'development'
+  mode: "development",
+
   // output config
   output: {
     // output filename
@@ -35,10 +39,6 @@ module.exports = {
     // specify path for all the assets within your application (like images and fonts)
     publicPath: ""
   },
-
-  // set mode to development, this would automatically enable a list of plugins for assisting development
-  // this also sets process.env.NODE_ENV on DefinePlugin to value 'development'
-  mode: "development",
 
   // set up Webpack dev server
   devServer: {
