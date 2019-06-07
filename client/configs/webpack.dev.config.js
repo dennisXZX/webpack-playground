@@ -25,19 +25,18 @@ module.exports = {
   output: {
     // output filename
     // use [name] to retrieve the original name of the file before bundling
-    // in development we don't need to consider browser cache, so no [contenthash] is needed in the file name
+    // in development we don't need to consider browser caching, so no [contenthash] is needed in the file name
     filename: "[name].bundle.js",
 
     // output path, which needs to be an absolute path
-    // the 'path' Node.js module is used to generate an absolute path
     path: path.resolve(__dirname, '../dist'),
 
-    // specify path for all the assets within your application (like images)
+    // specify path for all the assets within your application (like images and fonts)
     publicPath: ""
   },
 
-  // set mode to production, this would automatically enable a list of plugins for assisting development
-  // this also sets process.env.NODE_ENV on DefinePlugin to value development
+  // set mode to development, this would automatically enable a list of plugins for assisting development
+  // this also sets process.env.NODE_ENV on DefinePlugin to value 'development'
   mode: "development",
 
   // set up Webpack dev server
@@ -45,8 +44,8 @@ module.exports = {
     // where to serve content from
     contentBase: path.resolve(__dirname, 'dist'),
     // the filename that is considered the index file
-    index: 'hello-world.js.html',
-    // specify a port number to listen for requests on
+    index: 'hello-world.html',
+    // specify a port number listening to requests
     port: 9000,
     // enable Hot Module Replacement feature
     hot: true
@@ -58,7 +57,7 @@ module.exports = {
   },
 
   optimization: {
-    // use SplitChunksPlugin to extract common code into a separate chuck
+    // use SplitChunksPlugin to extract common code into a separate chunk
     splitChunks: {
       chunks: "all",
       minSize: 10000,
@@ -127,7 +126,7 @@ module.exports = {
       },
 
       // handle .hbs files,
-      // handlebars template is used as a base to generate an index.html in the dist folder
+      // handlebars template is used as a base to generate HTML files in the dist folder
       {
         test: /\.hbs$/,
         use: [
@@ -140,7 +139,7 @@ module.exports = {
 
   // plugin config
   plugins: [
-    // remove all the files in the output folder before generating new bundle files
+    // remove all the files in the output folder (dist folder) before generating new bundle files
     new CleanWebpackPlugin(),
 
     // generate an HTML file with all the bundles injected into it
@@ -150,8 +149,8 @@ module.exports = {
       // specify the output file name in dist folder
       filename: "hello-world.html",
 
-      // specify which JS chuck should be injected into the generated HTML file
-      // each chuck name should be existed in the entry object
+      // specify which JS chunk should be injected into the generated HTML file
+      // each chunk name should be associated with the entry object
       chunks: ['hello-world', 'vendors_hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine

@@ -22,20 +22,19 @@ module.exports = {
   output: {
     // output filename
     // use [name] to retrieve the original name of the file before bundling
-    // use [contenthash] to take advantage of cache
-    // so only change made to js files would generate a new bundle
+    // use [contenthash] to take advantage of caching
+    // so only changes made to JS files would generate a new chunk bundle
     filename: "[name].[contenthash].js",
 
     // output path, which needs to be an absolute path
-    // the 'path' Node.js module is used to generate an absolute path
     path: path.resolve(__dirname, '../dist'),
 
-    // specify path for all the assets within your application (like images)
+    // specify path for all the assets within your application (like images and fonts)
     publicPath: ""
   },
 
-  // set mode to production, this would automatically enable a list of plugins for optimisation
-  // this also sets process.env.NODE_ENV on DefinePlugin to value production
+  // set mode to production, this would automatically enable a list of plugins for production optimisation
+  // this also sets process.env.NODE_ENV on DefinePlugin to value 'production'
   mode: "production",
 
   // automatically resolve these file extensions
@@ -44,7 +43,7 @@ module.exports = {
   },
 
   optimization: {
-    // use SplitChunksPlugin to extract common code into a separate chuck
+    // use SplitChunksPlugin to extract common code into a separate chunk
     splitChunks: {
       chunks: "all",
       minSize: 10000,
@@ -74,8 +73,8 @@ module.exports = {
       // sass-loader converts SASS to CSS
       // postcss-loader converts modern CSS into something that most browsers can understand
       // use .postcssrc.json to config postcss-loader
-      // "precss" plugin allows you to use the latest CSS features
-      // "autoprefixer" plugin adds vendor prefixes to CSS rules
+      // "precss" postcss plugin allows you to use the latest CSS features
+      // "autoprefixer" postcss plugin adds vendor prefixes to CSS rules
       // css-loader translates CSS into CommonJS modules
       // MiniCssExtractPlugin.loader extracts CSS into a separate file
       {
@@ -113,7 +112,7 @@ module.exports = {
       },
 
       // handle .hbs files,
-      // handlebars template is used as a base to generate an index.html in the dist folder
+      // handlebars template is used as a base to generate HTML files in the dist folder
       {
         test: /\.hbs$/,
         use: [
@@ -130,7 +129,7 @@ module.exports = {
     // we don't need Terser plugin in 'production' mode as it's already included by default
     // new TerserPlugin(),
 
-    // extract CSS into a separate file to reduce the bundle size
+    // extract CSS into a separate file to reduce the JS bundle size
     // so user can download JS and CSS files in parallel
     // use [name] to retrieve the original name of the file before bundling
     // use [contenthash] to take advantage of file caching
@@ -139,7 +138,7 @@ module.exports = {
       filename: '[name].[contenthash].css'
     }),
 
-    // remove all the files in the output folder before generating new bundle files
+    // remove all the files in the output folder (dist folder) before generating new bundle files
     new CleanWebpackPlugin(),
 
     // generate an HTML file with all the bundles injected into it
@@ -149,8 +148,8 @@ module.exports = {
       // specify the output file name in dist folder
       filename: "hello-world.html",
 
-      // specify which JS chuck should be injected into the generated HTML file
-      // each chuck name should be existed in the entry object
+      // specify which JS chunk should be injected into the generated HTML file
+      // each chunk name should be associated with the entry object
       chunks: ['hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
 
       // title & description are dynamic data used in the handlebars template engine
