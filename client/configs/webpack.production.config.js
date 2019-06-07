@@ -165,7 +165,7 @@ module.exports = {
       chunks: ['kiwi', 'vendors_hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
-      template: "./templates/page-template-static.hbs"
+      template: "./templates/page-template-kiwi.hbs"
     }),
 
     new HtmlWebpackPlugin({
