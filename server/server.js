@@ -11,6 +11,14 @@ const PORT = process.env.PORT | 3000;
 app.use(express.static(path.resolve(__dirname, '../client/dist')))
 
 // config routes
+app.get('/', (req, res) => {
+  const pathToHtmlFile = path.resolve(__dirname, '../client/dist/app-launcher.html')
+
+  const contentFromHtmlFile = fs.readFileSync(pathToHtmlFile, 'utf-8')
+
+  res.send(contentFromHtmlFile)
+})
+
 app.get('/hello-world', (req, res) => {
   const pathToHtmlFile = path.resolve(__dirname, '../client/dist/hello-world.html')
 

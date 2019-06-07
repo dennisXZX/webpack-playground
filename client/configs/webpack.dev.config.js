@@ -18,7 +18,8 @@ module.exports = {
   entry: {
     'hello-world': path.resolve(__dirname, '../apps/hello-world/index.ts'),
     'kiwi': path.resolve(__dirname, '../apps/kiwi/index.ts'),
-    'react': path.resolve(__dirname, '../apps/react/index.tsx')
+    'react': path.resolve(__dirname, '../apps/react/index.tsx'),
+    'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index.tsx')
   },
 
   // output config
@@ -44,7 +45,7 @@ module.exports = {
     // where to serve content from
     contentBase: path.resolve(__dirname, 'dist'),
     // the filename that is considered the index file
-    index: 'hello-world.html',
+    index: 'app-launcher.html',
     // specify a port number listening to requests
     port: 9000,
     // enable Hot Module Replacement feature
@@ -151,7 +152,13 @@ module.exports = {
 
       // specify which JS chunk should be injected into the generated HTML file
       // each chunk name should be associated with the entry object
-      chunks: ['hello-world', 'vendors_hello-world', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: [
+        'hello-world',
+        'vendors_hello-world',
+        'vendors_hello-world_kiwi',
+        'vendors_hello-world_kiwi_react',
+        'vendors_app-launcher_hello-world_kiwi_react'
+      ],
 
       // title & description are dynamic data used in the handlebars template engine
       title: 'Hello World',
@@ -163,7 +170,12 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
-      chunks: ['kiwi', 'vendors_hello-world_kiwi', 'vendors_hello-world_kiwi_react'],
+      chunks: [
+        'kiwi',
+        'vendors_hello-world_kiwi',
+        'vendors_hello-world_kiwi_react',
+        'vendors_app-launcher_hello-world_kiwi_react'
+      ],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
       template: "./templates/page-template-kiwi.hbs"
@@ -171,10 +183,27 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       filename: "react.html",
-      chunks: ['react', 'vendors_react', 'vendors_hello-world_kiwi_react'],
+      chunks: [
+        'react',
+        'vendors_app-launcher_react',
+        'vendors_hello-world_kiwi_react',
+        'vendors_app-launcher_hello-world_kiwi_react'
+      ],
       title: 'Hello React',
       description: 'React playground',
-      template: "./templates/page-template-SPA.hbs"
+      template: "./templates/page-template-spa.hbs"
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: "app-launcher.html",
+      chunks: [
+        'app-launcher',
+        'vendors_app-launcher_react',
+        'vendors_app-launcher_hello-world_kiwi_react'
+      ],
+      title: 'App Launcher',
+      description: 'This is a playground for apps',
+      template: "./templates/page-template-spa.hbs"
     })
 
   ] // END OF plugins
