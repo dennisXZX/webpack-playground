@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 
 class AppItem extends Component {
+  props: {
+    name: string;
+  }
+
   render () {
+    const { name } = this.props
+
     return (
-      <div>app item</div>
+      <ul>
+        <li><a href={name}>{name}</a></li>
+      </ul>
     );
   }
 }
