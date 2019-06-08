@@ -79,12 +79,19 @@ module.exports = {
       // "precss" postcss plugin allows you to use the latest CSS features
       // "autoprefixer" postcss plugin adds vendor prefixes to CSS rules
       // css-loader translates CSS into CommonJS modules
+      // you can enable CSS module in css-loader option
       // MiniCssExtractPlugin.loader extracts CSS into a separate file
       {
         test:/\.(s*)css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            // query: {
+            //   modules: true,
+            //   localIdentName: '[name]__[local]--[hash:base64:8]',
+            // }
+          },
           'postcss-loader',
           'sass-loader'
         ]

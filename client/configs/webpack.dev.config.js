@@ -98,12 +98,19 @@ module.exports = {
       // "precss" plugin allows you to use the latest CSS features
       // "autoprefixer" plugin adds vendor prefixes to CSS rules
       // css-loader translates CSS into CommonJS modules
+      // you can enable CSS module in css-loader option
       // style-loader injects style tags to the generated HTML page
       {
         test:/\.(s*)css$/,
         use: [
           'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            // query: {
+            //   modules: true,
+            //   localIdentName: '[name]__[local]--[hash:base64:8]',
+            // }
+          },
           'postcss-loader',
           'sass-loader'
         ]
