@@ -37,7 +37,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
 
     // specify path for all the assets within your application (like images and fonts)
-    publicPath: ""
+    publicPath: "/"
   },
 
   // set up Webpack dev server
@@ -157,6 +157,7 @@ module.exports = {
         'vendors_hello-world',
         'vendors_hello-world_kiwi',
         'vendors_hello-world_kiwi_react',
+        'vendors_app-launcher_hello-world_kiwi',
         'vendors_app-launcher_hello-world_kiwi_react'
       ],
 
@@ -174,6 +175,7 @@ module.exports = {
         'kiwi',
         'vendors_hello-world_kiwi',
         'vendors_hello-world_kiwi_react',
+        'vendors_app-launcher_hello-world_kiwi',
         'vendors_app-launcher_hello-world_kiwi_react'
       ],
       title: 'Hello Kiwi',
@@ -199,6 +201,7 @@ module.exports = {
       chunks: [
         'app-launcher',
         'vendors_app-launcher_react',
+        'vendors_app-launcher_hello-world_kiwi',
         'vendors_app-launcher_hello-world_kiwi_react'
       ],
       title: 'App Launcher',
