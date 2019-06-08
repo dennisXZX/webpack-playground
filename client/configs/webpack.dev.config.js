@@ -74,12 +74,12 @@ module.exports = {
     rules: [
       // handle image files
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[hash].[ext]',
+              name: '[name].[hash:8].[ext]',
               outputPath: 'assets/images'
             },
           }
