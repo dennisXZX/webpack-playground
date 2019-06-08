@@ -49,7 +49,9 @@ module.exports = {
     // specify a port number listening to requests
     port: 9000,
     // enable Hot Module Replacement feature
-    hot: true
+    hot: true,
+    // display the error in the browser
+    overlay: true
   },
 
   // automatically resolve these file extensions
