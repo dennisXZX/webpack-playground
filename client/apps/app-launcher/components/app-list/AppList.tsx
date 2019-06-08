@@ -7,7 +7,7 @@ import { App } from '../../interfaces/app'
 import './appList.scss'
 
 class AppList extends Component {
-  apps: App[]
+  apps: App[] = []
 
   constructor (props) {
     super(props)

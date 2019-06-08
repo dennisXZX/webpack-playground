@@ -7,8 +7,10 @@ const app = express()
 
 const PORT = process.env.PORT | 3000;
 
+const staticMiddleware = express.static(path.resolve(__dirname, '../client/dist'))
+
 // handle the static files like JS, CSS, fonts and images
-app.use(express.static(path.resolve(__dirname, '../client/dist')))
+app.use(staticMiddleware)
 
 // config routes
 app.get('/', (req, res) => {
@@ -34,6 +36,7 @@ app.get('/kiwi', (req, res) => {
 
   res.send(contentFromHtmlFile)
 })
+
 
 app.get('/react', (req, res) => {
   const pathToHtmlFile = path.resolve(__dirname, '../client/dist/react.html')
