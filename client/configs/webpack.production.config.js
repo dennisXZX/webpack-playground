@@ -108,7 +108,14 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [ '@babel/env' ],
+            presets: [
+              '@babel/env',
+              {
+                "target": {
+                  "browsers": ["last 2 versions"]
+                }
+              }
+            ],
             plugins: [ 'transform-class-properties' ]
           }
         }
