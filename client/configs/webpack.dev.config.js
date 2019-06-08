@@ -16,7 +16,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   // entry config for multiple entry points
   entry: {
-    'hello-world': path.resolve(__dirname, '../apps/hello-world/index.ts'),
+    // the 'hello-world' project is required to run in older browsers,
+    // which require a polyfill, 'core-js' is a polyfill library recommended by Babel
+    'hello-world': ['core-js/stable', path.resolve(__dirname, '../apps/hello-world/index.ts')],
     'kiwi': path.resolve(__dirname, '../apps/kiwi/index.ts'),
     'react': path.resolve(__dirname, '../apps/react/index.tsx'),
     'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index.tsx')
