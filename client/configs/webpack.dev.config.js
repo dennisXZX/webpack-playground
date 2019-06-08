@@ -56,6 +56,9 @@ module.exports = {
     overlay: true
   },
 
+  // add source map in dev mode
+  devtool: "source-map",
+
   // automatically resolve these file extensions
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
