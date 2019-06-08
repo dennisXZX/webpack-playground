@@ -27,6 +27,5 @@ Routes:
 - use ts-node in the backend
 - apply eslint in the backend
 - create a vue app
-- find out why style-loader does not work in dev mode in .tsx (AppList.tsx)
 - implement the express app properly (optimise routes config, add 404..etc)
 - try another nodejs framework?
