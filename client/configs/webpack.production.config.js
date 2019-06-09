@@ -6,9 +6,10 @@ const path = require('path');
   - No need to set up Terser plugin for JS files minification as it is already included by default in Webpack 4
 */
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizedCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
@@ -95,7 +96,7 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: 'css-loader'
             // query: {
             //   modules: true,
             //   localIdentName: '[name]__[local]--[hash:base64:8]',
@@ -147,6 +148,9 @@ module.exports = {
   plugins: [
     // handle .vue files
     new VueLoaderPlugin(),
+
+    // remove duplicate CSS code and also minimise them
+    new OptimizedCssAssetsPlugin(),
 
     // minimise output JS bundle files
     // we don't need Terser plugin in 'production' mode as it's already included by default
