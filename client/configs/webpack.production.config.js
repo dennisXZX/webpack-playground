@@ -7,6 +7,7 @@ const path = require('path');
 */
 
 const webpack = require('webpack')
+const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizedCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -246,7 +247,13 @@ module.exports = {
       "process.env": {
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
+
+    // compress all your assets with gzip algorithm
+    // another even more promising compression algorithm is called Brotli
+    // new CompressionPlugin({
+    //   algorithm: 'gzip'
+    // })
 
   ] // END OF plugins
 }
