@@ -6,6 +6,7 @@ const path = require('path');
   - No need to set up Terser plugin for JS files minification as it is already included by default in Webpack 4
 */
 
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizedCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -237,6 +238,14 @@ module.exports = {
       title: 'App Launcher',
       description: 'This is a playground for apps',
       template: "./templates/page-template-spa.hbs"
+    }),
+
+    // add env variables to bundled code
+    // some libraries would strip out of code that is meant for development
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify('production')
+      }
     })
 
   ] // END OF plugins
