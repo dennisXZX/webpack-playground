@@ -10,8 +10,9 @@ const path = require('path');
   - Set up Webpack dev server
 */
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
@@ -247,7 +248,10 @@ module.exports = {
       title: 'App Launcher',
       description: 'This is a playground for apps',
       template: "./templates/page-template-spa.hbs"
-    })
+    }),
+
+    // generate a bundle analysis report
+    new BundleAnalyzerPlugin()
 
   ] // END OF plugins
 }
