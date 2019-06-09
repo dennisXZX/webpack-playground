@@ -46,6 +46,14 @@ app.get('/react', (req, res) => {
   res.send(contentFromHtmlFile)
 })
 
+app.get('/vue', (req, res) => {
+  const pathToHtmlFile = path.resolve(__dirname, '../client/dist/vue.html')
+
+  const contentFromHtmlFile = fs.readFileSync(pathToHtmlFile, 'utf-8')
+
+  res.send(contentFromHtmlFile)
+})
+
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}.`)
 })

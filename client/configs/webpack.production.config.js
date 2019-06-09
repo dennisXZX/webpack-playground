@@ -9,6 +9,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   // entry config for multiple entry points
@@ -18,6 +19,7 @@ module.exports = {
     'hello-world': ['core-js/stable', path.resolve(__dirname, '../apps/hello-world/index')],
     'kiwi': path.resolve(__dirname, '../apps/kiwi/index'),
     'react': path.resolve(__dirname, '../apps/react-app/index'),
+    'vue': path.resolve(__dirname, '../apps/vue-app/app'),
     'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index')
   },
 
@@ -58,6 +60,13 @@ module.exports = {
   module: {
     // specify loaders for Webpack, each loader is represented as an object
     rules: [
+
+      // handle .vue files
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+
       // handle image files
       {
         test: /\.(png|jpg|gif)$/,
@@ -116,14 +125,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/env',
-              {
-                "target": {
-                  "browsers": ["last 2 versions"]
-                }
-              }
-            ],
+            presets: [ '@babel/env' ],
             plugins: [ 'transform-class-properties' ]
           }
         }
@@ -143,6 +145,9 @@ module.exports = {
 
   // plugin config
   plugins: [
+    // handle .vue files
+    new VueLoaderPlugin(),
+
     // minimise output JS bundle files
     // we don't need Terser plugin in 'production' mode as it's already included by default
     // new TerserPlugin(),
@@ -204,6 +209,18 @@ module.exports = {
       ],
       title: 'Hello React',
       description: 'React playground',
+      template: "./templates/page-template-spa.hbs"
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: "vue.html",
+      chunks: [
+        'vue',
+        'vendors_vue',
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
+      ],
+      title: 'Hello Vue',
+      description: 'Vue playground',
       template: "./templates/page-template-spa.hbs"
     }),
 

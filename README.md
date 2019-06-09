@@ -24,8 +24,8 @@ Routes:
 
 ### Todo
 
+- minimise CSS in prod mode
 - use ts-node in the backend
 - apply eslint in the backend
-- create a vue app
 - implement the express app properly (optimise routes config, add 404..etc)
 - try another nodejs framework?

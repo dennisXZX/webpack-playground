@@ -12,6 +12,7 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin/dist/clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   // entry config for multiple entry points
@@ -21,6 +22,7 @@ module.exports = {
     'hello-world': ['core-js/stable', path.resolve(__dirname, '../apps/hello-world/index')],
     'kiwi': path.resolve(__dirname, '../apps/kiwi/index'),
     'react': path.resolve(__dirname, '../apps/react-app/index'),
+    'vue': path.resolve(__dirname, '../apps/vue-app/app'),
     'app-launcher': path.resolve(__dirname, '../apps/app-launcher/index')
   },
 
@@ -77,6 +79,13 @@ module.exports = {
   module: {
     // specify loaders for Webpack, each loader is represented as an object
     rules: [
+
+      // handle .vue files
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+
       // handle image files
       {
         test: /\.(png|jpg|gif)$/,
@@ -100,10 +109,11 @@ module.exports = {
       // css-loader translates CSS into CommonJS modules
       // you can enable CSS module in css-loader option
       // style-loader injects style tags to the generated HTML page
+      // for Vue specifically, we need to use vue-style-loader to replace style-loader
       {
         test:/\.(s*)css$/,
         use: [
-          'style-loader',
+          'vue-style-loader',
           {
             loader: 'css-loader',
             // query: {
@@ -135,14 +145,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/env',
-              {
-                "target": {
-                  "browsers": ["last 2 versions"]
-                }
-              }
-            ],
+            presets: [ '@babel/env' ],
             plugins: [ 'transform-class-properties' ]
           }
         }
@@ -162,6 +165,9 @@ module.exports = {
 
   // plugin config
   plugins: [
+    // handle .vue files
+    new VueLoaderPlugin(),
+
     // remove all the files in the output folder (dist folder) before generating new bundle files
     new CleanWebpackPlugin(),
 
@@ -180,7 +186,7 @@ module.exports = {
         'vendors_hello-world_kiwi',
         'vendors_hello-world_kiwi_react',
         'vendors_app-launcher_hello-world_kiwi',
-        'vendors_app-launcher_hello-world_kiwi_react'
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
       ],
 
       // title & description are dynamic data used in the handlebars template engine
@@ -198,7 +204,7 @@ module.exports = {
         'vendors_hello-world_kiwi',
         'vendors_hello-world_kiwi_react',
         'vendors_app-launcher_hello-world_kiwi',
-        'vendors_app-launcher_hello-world_kiwi_react'
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
       ],
       title: 'Hello Kiwi',
       description: 'Kiwi playground',
@@ -211,10 +217,22 @@ module.exports = {
         'react',
         'vendors_app-launcher_react',
         'vendors_hello-world_kiwi_react',
-        'vendors_app-launcher_hello-world_kiwi_react'
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
       ],
       title: 'Hello React',
       description: 'React playground',
+      template: "./templates/page-template-spa.hbs"
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: "vue.html",
+      chunks: [
+        'vue',
+        'vendors_vue',
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
+      ],
+      title: 'Hello Vue',
+      description: 'Vue playground',
       template: "./templates/page-template-spa.hbs"
     }),
 
@@ -224,7 +242,7 @@ module.exports = {
         'app-launcher',
         'vendors_app-launcher_react',
         'vendors_app-launcher_hello-world_kiwi',
-        'vendors_app-launcher_hello-world_kiwi_react'
+        'vendors_app-launcher_hello-world_kiwi_react_vue'
       ],
       title: 'App Launcher',
       description: 'This is a playground for apps',
