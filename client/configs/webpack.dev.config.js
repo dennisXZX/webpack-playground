@@ -120,6 +120,7 @@ module.exports = {
       // need to create a typings.d.ts in the project root to handle image and JSON imports in TS file
       {
         test: /\.tsx?$/,
+        exclude: /node_modules/,
         loader: "ts-loader"
       },
 
